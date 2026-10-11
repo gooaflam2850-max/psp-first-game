@@ -5,12 +5,17 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: pspdev/pspdev:latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Set PSPDEV environment
+      run: |
+        echo "PSPDEV=/usr/local/pspdev" >> $GITHUB_ENV
+        echo "/usr/local/pspdev/bin" >> $GITHUB_PATH
 
     - name: Build project
       run: |
